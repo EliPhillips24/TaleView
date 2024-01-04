@@ -14,6 +14,6 @@
       <TextField fx:id="wins" layoutX="297.0" layoutY="230.0" />
       <Button layoutX="429.0" layoutY="82.0" mnemonicParsing="false" onAction="#eddit" text="Eddit" />
       <Button layoutX="509.0" layoutY="82.0" mnemonicParsing="false" onAction="#Saving" text="saving" />
-      <Button layoutX="509.0" layoutY="133.0" mnemonicParsing="false" onAction="#checklist" text="Check List" />
+      <Button layoutX="508.0" layoutY="175.0" mnemonicParsing="false" onAction="#RecalData" text="Recal" />
    </children>
 </Pane>

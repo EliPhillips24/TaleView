@@ -13,13 +13,14 @@ public Person(){
     this.won = "";
 }
 
-    public Person(String firstName, String lastName, String won) {
+    public Person(String firstName, String lastName, String won)  {
         this.firstName = firstName;
         this.lastName = lastName;
         this.won = won;
     }
 
-    public String getFirstName() {
+    public String getFirstName()
+    {
         return firstName;
     }
 
@@ -42,5 +43,9 @@ public Person(){
     public void setWon(String won) {
         this.won = won;
     }
+
+public String toString() {
+    return  firstName +  lastName + won;
+}
 
 }
