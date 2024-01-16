@@ -5,7 +5,11 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.util.converter.IntegerStringConverter;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -25,8 +29,10 @@ public class HelloController {
     public TextField content;
     public TextField where;
 
+    public ImageView myimageView;
 
     //        myController = (HelloController) fxmlLoader.getController();
+
     public void setTableView()  throws Exception {
 
         TableColumn firstNameColumn = new TableColumn<Person, String>("First Name");
@@ -77,19 +83,26 @@ public class HelloController {
 
     public void initialize() throws Exception {
 
-        TableColumn firstNameColumn = new TableColumn<Person, String>("Company");
-        firstNameColumn.setCellValueFactory(new PropertyValueFactory<Person, String>("firstName"));
-        TableColumn lastNameColumn = new TableColumn<Person, String>("Company id");
-        lastNameColumn.setCellValueFactory(new PropertyValueFactory<Person, String>("lastName"));
-        TableColumn wonColummn = new TableColumn<Person, String>("When they where founded");
-        wonColummn.setCellValueFactory(new PropertyValueFactory<Person, Integer>("won"));
 
-        TableColumn subsCollumn = new TableColumn<Person, String>("Subs");
-        subsCollumn.setCellValueFactory(new PropertyValueFactory<Person, String>("subs"));
-        TableColumn contentCollummn = new TableColumn<Person, String>("Content");
-        contentCollummn.setCellValueFactory(new PropertyValueFactory<Person, String>("Content"));
-        TableColumn whereCollumn = new TableColumn<Person, String>("where");
-        whereCollumn.setCellValueFactory(new PropertyValueFactory<Person, Integer>("where"));
+        TableColumn<Person, String> firstNameColumn = new TableColumn<>("Company");
+        firstNameColumn.setCellValueFactory(new PropertyValueFactory<Person, String>("firstName"));
+
+        TableColumn<Person, String> lastNameColumn = new TableColumn<>("lastName");
+        lastNameColumn.setCellValueFactory(new PropertyValueFactory<Person, String>("lastName"));
+
+        TableColumn<Person, String> wonColummn = new TableColumn<>("When they were founded");
+        wonColummn.setCellValueFactory(new PropertyValueFactory<>("won"));
+
+        TableColumn<Person, String> subsCollumn = new TableColumn<>("Subs");
+        subsCollumn.setCellValueFactory(new PropertyValueFactory<>("subs"));
+
+        TableColumn<Person, String> contentCollummn = new TableColumn<>("Content");
+        contentCollummn.setCellValueFactory(new PropertyValueFactory<>("content"));  // Assuming "content" is the correct property name
+
+        TableColumn<Person, String> whereCollumn = new TableColumn<>("Where");
+        whereCollumn.setCellValueFactory(new PropertyValueFactory<>("where"));
+
+
 
         myTableView.getColumns().add(firstNameColumn);
         myTableView.getColumns().add(lastNameColumn);
@@ -101,9 +114,39 @@ public class HelloController {
         //myTableView.getItems().add(new Person("Eli","Phillips","79","12","12","12"));
         myTableView.getSortOrder().add(firstNameColumn);
         //  @FXML
-myTableView.setEditable(true);
-     //   this.RecalData();
+        myTableView.setEditable(true);
+       this.RecalData();
 
+        firstNameColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+        firstNameColumn.setOnEditCommit(event -> {
+            Person cellData = event.getRowValue();
+            cellData.setFirstName(event.getNewValue());
+        });
+        lastNameColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+        lastNameColumn.setOnEditCommit(event -> {
+            Person cellData = event.getRowValue();
+            cellData.setFirstName(event.getNewValue());
+        });
+        wonColummn.setCellFactory(TextFieldTableCell.forTableColumn());
+        wonColummn.setOnEditCommit(event -> {
+            Person cellData = event.getRowValue();
+            cellData.setFirstName(event.getNewValue());
+        });
+        subsCollumn.setCellFactory(TextFieldTableCell.forTableColumn());
+        subsCollumn.setOnEditCommit(event -> {
+            Person cellData = event.getRowValue();
+            cellData.setFirstName(event.getNewValue());
+        });
+        contentCollummn.setCellFactory(TextFieldTableCell.forTableColumn());
+        contentCollummn.setOnEditCommit(event -> {
+            Person cellData = event.getRowValue();
+            cellData.setFirstName(event.getNewValue());
+        });
+        whereCollumn.setCellFactory(TextFieldTableCell.forTableColumn());
+        whereCollumn.setOnEditCommit(event -> {
+            Person cellData = event.getRowValue();
+            cellData.setFirstName(event.getNewValue());
+        });
 
     }
 
@@ -146,6 +189,11 @@ public void RecalData() throws Exception{
 
 // Add the loaded activities to the table
     myTableView.getItems().addAll(activities);
+}
+public void GetImage() throws Exception{
+    FileInputStream input = new FileInputStream("src/Netflix.png");
+    Image image = new Image(input);
+    ImageView myimageView = new ImageView(image);
 }
 
 
